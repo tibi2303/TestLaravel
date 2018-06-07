@@ -17,12 +17,28 @@ class userseeder extends Seeder
                 1 => 'user',
                 2 => 'guest'
             ];
-            for ($i=1; $i < 11; $i++) {
+            $emails = [
+                0 => 'admin',
+                1 => 'user',
+                2 => 'guest',
+                3 => 'john',
+                4 => 'anne',
+                5 => 'andrew',
+            ];
+            $names = [
+                0 => 'admin',
+                1 => 'user',
+                2 => 'guest',
+                3 => 'john',
+                4 => 'anne',
+                5 => 'andrew',
+            ];
+            for ($i=1; $i < 101; $i++) {
                 $users[] = [
                         'id' => $i,
-                        'name' => str_random(10),
+                        'name' => $names[rand(0,5)],
                         'role' => $roles[rand(0,2)],
-                        'email' => str_random(10).'@gmail.com'
+                        'email' => $emails[rand(0,5)] . str_random(2).'@gmail.com'
                     ];
             };
     		foreach ($users as $user) {

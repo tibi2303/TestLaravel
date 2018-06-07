@@ -11,4 +11,6 @@
 |
 */
 
-Route::get('/', 'UserController@listUser');
+Route::get('/', function (){
+    return view('layouts.app');
+});
