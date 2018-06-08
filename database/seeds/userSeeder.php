@@ -26,20 +26,20 @@ class userSeeder extends Seeder
                 5 => 'andrew',
             ];
             $firstNames = [
-                0 => 'john',
-                1 => 'anne',
-                2 => 'andrew',
-                3 => 'heisenberg',
-                4 => 'mary',
-                5 => 'elizabeth',
+                0 => 'John',
+                1 => 'Anne',
+                2 => 'Andrew',
+                3 => 'Heisenberg',
+                4 => 'Mary',
+                5 => 'Elizabeth',
             ];
             $lastNames = [
-                0 => 'smith',
-                1 => 'guerrero',
-                2 => 'alfonso',
-                3 => 'williams',
-                4 => 'davis',
-                5 => 'miller',
+                0 => 'Smith',
+                1 => 'Guerrero',
+                2 => 'Alfonso',
+                3 => 'Williams',
+                4 => 'Davis',
+                5 => 'Miller',
             ];
             for ($i=1; $i < 101; $i++) {
                 $users[] = [
