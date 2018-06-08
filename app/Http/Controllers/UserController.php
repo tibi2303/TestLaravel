@@ -8,19 +8,28 @@ use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
-    public function listUsers() {
-
-    	$users = User::paginate(10);
-
-    	return $users;
+    public function __construct() {
+        $this->roles = ['user','admin','guest'];
     }
     public function searchUsers(Request $request) {
 
-        $query = $request->input('query');
+        $data = $request->all();
 
-        $users = User::where('name','like','%'.$query.'%')->orWhere('email','like','%'.$query.'%')->paginate(10);
+        $users = User::where(function ($query) use($data) {
+           if (isset($data['role'])) {
+               $query->where('role',$data['role']);
+           }
+           $query->where(function ($search) use($data){
+               $search->where('email','like','%'.$data['search'].'%')->orWhere('name','like','%'.$data['search'].'%' );
+           });
+        })->paginate(10);
 
-        return $users;
+        $roles = $this->roles;
+
+        return $data = [
+          'roles' => $roles,
+          'users' => $users
+        ];
 
     }
 }

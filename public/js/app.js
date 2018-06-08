@@ -47346,6 +47346,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -47355,7 +47375,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             users: [],
             pagination: {},
-            search: ''
+            search: '',
+            searchRole: '',
+            roles: []
         };
     },
     created: function created() {
@@ -47363,11 +47385,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        fetchUsers: function fetchUsers(pageUrl) {
+        fetchUsers: function fetchUsers(pageUrl, search) {
             var vm = this;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(pageUrl || 'api/users').then(function (response) {
-                vm.users = response.data;
-                vm.paginateUsers(response.data);
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(pageUrl || 'api/users/search/', { params: { search: vm.search, role: vm.searchRole } }).then(function (response) {
+                vm.users = response.data.users;
+                vm.paginateUsers(response.data.users);
+                vm.roles = response.data.roles;
             });
         },
         paginateUsers: function paginateUsers(config) {
@@ -47375,15 +47398,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 currentPage: config.current_page,
                 nextPageUrl: config.next_page_url,
                 lastPageUrl: config.prev_page_url,
-                lastPage: config.last_page
+                lastPage: config.last_page,
+                firstPageUrl: config.first_page_url
             };
-        },
-        searchUsers: function searchUsers() {
-            var vm = this;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/users/search/', { params: { query: vm.search } }).then(function (response) {
-                vm.users = response.data;
-                vm.paginateUsers(response.data);
-            });
         }
     }
 });
@@ -47397,109 +47414,197 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "root" }, [
-    _c("input", {
-      directives: [
+    _c("div", { staticClass: "filter-block" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        staticClass: "SearchInput",
+        attrs: { type: "text", placeholder: "placeholder" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "select",
         {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.search,
-          expression: "search"
-        }
-      ],
-      staticClass: "SearchInput",
-      attrs: { type: "text", placeholder: "placeholder" },
-      domProps: { value: _vm.search },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchRole,
+              expression: "searchRole"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.searchRole = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
           }
-          _vm.search = $event.target.value
-        }
-      }
-    }),
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("All")]),
+          _vm._v(" "),
+          _vm._l(_vm.roles, function(role) {
+            return _c("option", [_vm._v(_vm._s(role))])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn",
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              _vm.fetchUsers(_vm.pagination.firstPageUrl, _vm.search)
+            }
+          }
+        },
+        [_vm._v("Submit")]
+      )
+    ]),
     _vm._v(" "),
-    _c(
-      "a",
-      {
-        staticClass: "btn",
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            _vm.searchUsers(_vm.search)
+    _c("div", { staticClass: "pagination-block" }, [
+      _c(
+        "a",
+        {
+          class: [
+            { disabled: !_vm.pagination.lastPageUrl },
+            "btn btn-primary btn-sm"
+          ],
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              _vm.fetchUsers(_vm.pagination.lastPageUrl)
+            }
           }
-        }
-      },
-      [_vm._v("Submit")]
-    ),
-    _vm._v(" "),
-    _c(
-      "a",
-      {
-        class: [{ disabled: !_vm.pagination.lastPageUrl }, "page-link"],
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            _vm.fetchUsers(_vm.pagination.lastPageUrl)
+        },
+        [_vm._v("Previous")]
+      ),
+      _vm._v(
+        "\n\n        Page " +
+          _vm._s(_vm.pagination.currentPage) +
+          " of " +
+          _vm._s(_vm.pagination.lastPage) +
+          "\n\n        "
+      ),
+      _c(
+        "a",
+        {
+          class: [
+            { disabled: !_vm.pagination.nextPageUrl },
+            "btn btn-primary btn-sm"
+          ],
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              _vm.fetchUsers(_vm.pagination.nextPageUrl)
+            }
           }
-        }
-      },
-      [_vm._v("Previous")]
-    ),
-    _vm._v(
-      "\n\n    Page " +
-        _vm._s(_vm.pagination.currentPage) +
-        " of " +
-        _vm._s(_vm.pagination.lastPage) +
-        "\n\n    "
-    ),
-    _c(
-      "a",
-      {
-        class: [{ disabled: !_vm.pagination.nextPageUrl }, "page-link"],
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            _vm.fetchUsers(_vm.pagination.nextPageUrl)
-          }
-        }
-      },
-      [_vm._v("Next")]
-    ),
+        },
+        [_vm._v("Next")]
+      )
+    ]),
     _vm._v(" "),
     _c(
       "table",
-      _vm._l(_vm.users.data, function(user) {
-        return _c("tr", [
-          _c("td", [
-            _vm._v("\n                " + _vm._s(user.id) + "\n            ")
-          ]),
-          _vm._v(" "),
-          _c("td", [
-            _vm._v("\n                " + _vm._s(user.name) + "\n            ")
-          ]),
-          _vm._v(" "),
-          _c("td", [
-            _vm._v("\n                " + _vm._s(user.email) + "\n            ")
-          ]),
-          _vm._v(" "),
-          _c("td", [
-            _vm._v(
-              "\n                " + _vm._s(user.updated_at) + "\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", [
-            _vm._v(
-              "\n                " + _vm._s(user.created_at) + "\n            "
-            )
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.users.data, function(user) {
+          return _c("tr", [
+            _c("td", [
+              _vm._v("\n                " + _vm._s(user.id) + "\n            ")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                " + _vm._s(user.name) + "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                " + _vm._s(user.email) + "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                " + _vm._s(user.role) + "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                " +
+                  _vm._s(user.updated_at) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                " +
+                  _vm._s(user.created_at) +
+                  "\n            "
+              )
+            ])
           ])
-        ])
-      })
+        })
+      ],
+      2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("NAME")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated at")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Created at")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

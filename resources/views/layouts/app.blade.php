@@ -14,7 +14,9 @@
 </head>
 <body>
 <div id="app">
-    <user-table></user-table>
+    <div class="container">
+        <user-table></user-table>
+    </div>
 </div>
 
 <!-- Scripts -->

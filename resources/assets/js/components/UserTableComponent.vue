@@ -1,16 +1,33 @@
 
 <template>
     <div class="root">
+        <div class="filter-block">
+            <input v-model="search" type="text" class="SearchInput" placeholder="placeholder">
+            <select v-model="searchRole">
+                <option value="">All</option>
+                <option v-for="role in roles">{{ role }}</option>
+            </select>
+            <a href="#" @click="fetchUsers(pagination.firstPageUrl , search)" class="btn">Submit</a>
+        </div>
+        <div class="pagination-block">
+            <a v-bind:class="[{disabled: !pagination.lastPageUrl}, 'btn btn-primary btn-sm']" href="#" @click="fetchUsers(pagination.lastPageUrl)">Previous</a>
 
-        <input v-model="search" type="text" class="SearchInput" placeholder="placeholder">
-        <a href="#" @click="searchUsers(search)" class="btn">Submit</a>
-        <a v-bind:class="[{disabled: !pagination.lastPageUrl}, 'page-link']" href="#" @click="fetchUsers(pagination.lastPageUrl)">Previous</a>
+            Page {{ pagination.currentPage }} of {{ pagination.lastPage }}
 
-        Page {{ pagination.currentPage }} of {{ pagination.lastPage }}
+            <a v-bind:class="[{disabled: !pagination.nextPageUrl}, 'btn btn-primary btn-sm']" href="#" @click="fetchUsers(pagination.nextPageUrl)">Next</a>
+        </div>
 
-        <a v-bind:class="[{disabled: !pagination.nextPageUrl}, 'page-link']" href="#" @click="fetchUsers(pagination.nextPageUrl)">Next</a>
-
-        <table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Updated at</th>
+                    <th>Created at</th>
+                </tr>
+            </thead>
             <tr v-for="user in users.data">
                 <td>
                     {{user.id}}
@@ -20,6 +37,9 @@
                 </td>
                 <td>
                     {{user.email}}
+                </td>
+                <td>
+                    {{user.role}}
                 </td>
                 <td>
                     {{user.updated_at}}
@@ -40,19 +60,22 @@
             return {
                 users: [],
                 pagination: {},
-                search: ''
+                search: '',
+                searchRole: '',
+                roles: []
             }
         },
         created() {
             this.fetchUsers();
         },
         methods: {
-            fetchUsers(pageUrl) {
+            fetchUsers(pageUrl, search) {
                 let vm = this;
-                axios.get(pageUrl || 'api/users')
+                axios.get(pageUrl || 'api/users/search/', {params: {search: vm.search, role: vm.searchRole}})
                     .then(function (response) {
-                        vm.users = response.data;
-                        vm.paginateUsers(response.data);
+                        vm.users = response.data.users;
+                        vm.paginateUsers(response.data.users);
+                        vm.roles = response.data.roles;
                     });
             },
             paginateUsers(config) {
@@ -61,15 +84,8 @@
                     nextPageUrl: config.next_page_url,
                     lastPageUrl: config.prev_page_url,
                     lastPage: config.last_page,
+                    firstPageUrl: config.first_page_url
                 };
-            },
-            searchUsers() {
-                let vm = this;
-                axios.get('api/users/search/',{params: {query: vm.search}})
-                    .then(function (response) {
-                        vm.users = response.data;
-                        vm.paginateUsers(response.data);
-                    });
             }
         }
     }
