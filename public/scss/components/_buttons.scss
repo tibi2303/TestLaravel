@@ -1,0 +1,10 @@
+.btn-main {
+  background: $main-color;
+  color: #fff;
+  transition: 0.3s ease all;
+  border: 1px solid $main-color;
+  &:hover {
+    background: #fff;
+    color: $main-color;
+  }
+}

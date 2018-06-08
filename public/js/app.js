@@ -47366,6 +47366,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -47425,7 +47432,7 @@ var render = function() {
           }
         ],
         staticClass: "SearchInput",
-        attrs: { type: "text", placeholder: "placeholder" },
+        attrs: { type: "text", placeholder: "Search" },
         domProps: { value: _vm.search },
         on: {
           input: function($event) {
@@ -47477,7 +47484,7 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "btn",
+          staticClass: "search-btn",
           attrs: { href: "#" },
           on: {
             click: function($event) {
@@ -47485,7 +47492,74 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Submit")]
+        [
+          _c("svg", [
+            _c("use", { attrs: { "xlink:href": "svg/svg-sprite.svg#search" } })
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table custom-table" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.users.data, function(user) {
+            return _c("tr", [
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.id) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.name) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.email) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.role) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.updated_at) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(user.created_at) +
+                    "\n                "
+                )
+              ])
+            ])
+          })
+        ],
+        2
       )
     ]),
     _vm._v(" "),
@@ -47493,10 +47567,7 @@ var render = function() {
       _c(
         "a",
         {
-          class: [
-            { disabled: !_vm.pagination.lastPageUrl },
-            "btn btn-primary btn-sm"
-          ],
+          class: [{ disabled: !_vm.pagination.lastPageUrl }, "btn btn-main"],
           attrs: { href: "#" },
           on: {
             click: function($event) {
@@ -47506,20 +47577,20 @@ var render = function() {
         },
         [_vm._v("Previous")]
       ),
-      _vm._v(
-        "\n\n        Page " +
-          _vm._s(_vm.pagination.currentPage) +
-          " of " +
-          _vm._s(_vm.pagination.lastPage) +
-          "\n\n        "
-      ),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Page " +
+            _vm._s(_vm.pagination.currentPage) +
+            " of " +
+            _vm._s(_vm.pagination.lastPage)
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "a",
         {
-          class: [
-            { disabled: !_vm.pagination.nextPageUrl },
-            "btn btn-primary btn-sm"
-          ],
+          class: [{ disabled: !_vm.pagination.nextPageUrl }, "btn btn-main"],
           attrs: { href: "#" },
           on: {
             click: function($event) {
@@ -47529,58 +47600,7 @@ var render = function() {
         },
         [_vm._v("Next")]
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      { staticClass: "table" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._l(_vm.users.data, function(user) {
-          return _c("tr", [
-            _c("td", [
-              _vm._v("\n                " + _vm._s(user.id) + "\n            ")
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " + _vm._s(user.name) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " + _vm._s(user.email) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " + _vm._s(user.role) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(user.updated_at) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(user.created_at) +
-                  "\n            "
-              )
-            ])
-          ])
-        })
-      ],
-      2
-    )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -47592,7 +47612,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("NAME")]),
+        _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
