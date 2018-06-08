@@ -47389,17 +47389,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var vm = this;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(pageUrl || 'api/users/search/', { params: { search: vm.search, role: vm.searchRole } }).then(function (response) {
                 vm.users = response.data.users;
-                vm.paginateUsers(response.data.users);
                 vm.roles = response.data.roles;
+                vm.paginateUsers(response.data.users);
             });
         },
-        paginateUsers: function paginateUsers(config) {
+        paginateUsers: function paginateUsers(configPagination) {
             this.pagination = {
-                currentPage: config.current_page,
-                nextPageUrl: config.next_page_url,
-                lastPageUrl: config.prev_page_url,
-                lastPage: config.last_page,
-                firstPageUrl: config.first_page_url
+                currentPage: configPagination.current_page,
+                nextPageUrl: configPagination.next_page_url,
+                lastPageUrl: configPagination.prev_page_url,
+                lastPage: configPagination.last_page,
+                firstPageUrl: configPagination.first_page_url
             };
         }
     }
