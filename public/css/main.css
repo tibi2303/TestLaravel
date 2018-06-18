@@ -1,17 +1,21 @@
 /* Variables */
+
 body {
-  font-family: "Roboto", sans-serif; }
+  font-family: "Roboto", sans-serif;
+}
 
 .btn-main {
   background: #f8bd32;
   color: #fff;
   -webkit-transition: 0.3s ease all;
-  -o-transition: 0.3s ease all;
   transition: 0.3s ease all;
-  border: 1px solid #f8bd32; }
-  .btn-main:hover {
-    background: #fff;
-    color: #f8bd32; }
+  border: 1px solid #f8bd32;
+}
+
+.btn-main:hover {
+  background: #fff;
+  color: #f8bd32;
+}
 
 .filter-block {
   width: 100%;
@@ -21,71 +25,96 @@ body {
   padding-right: 82px;
   border: 1px solid #f8bd32;
   border-radius: 5px;
-  overflow: hidden; }
-  .filter-block input {
-    display: table-cell;
-    outline: none;
-    border: none;
-    width: 80%;
-    padding: 10px 10px 10px 25px;
-    font-size: 20px;
-    margin: 10px 0; }
-  .filter-block select {
-    width: 20%;
-    display: table-cell;
-    border-left: 1px solid #e0e0e0;
-    border-top: none;
-    border-bottom: none;
-    border-right: none;
-    outline: none;
-    padding: 10px 10px 10px 15px;
-    font-size: 20px;
-    margin: 10px 0; }
-  .filter-block .search-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: #f8bd32;
-    padding: 18px 20px 0;
-    height: 100%;
-    border: 1px solid #f8bd32; }
-    .filter-block .search-btn svg {
-      width: 30px;
-      height: 30px;
-      fill: #fff;
-      -webkit-transition: 0.3s ease all;
-      -o-transition: 0.3s ease all;
-      transition: 0.3s ease all; }
-    .filter-block .search-btn:hover {
-      background: #fff; }
-      .filter-block .search-btn:hover svg {
-        fill: #f8bd32; }
+  overflow: hidden;
+}
+
+.filter-block input {
+  display: table-cell;
+  outline: none;
+  border: none;
+  width: 80%;
+  padding: 10px 10px 10px 25px;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.filter-block select {
+  width: 20%;
+  display: table-cell;
+  border-left: 1px solid #e0e0e0;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  outline: none;
+  padding: 10px 10px 10px 15px;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.filter-block .search-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #f8bd32;
+  padding: 18px 20px 0;
+  height: 100%;
+  border: 1px solid #f8bd32;
+}
+
+.filter-block .search-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+}
+
+.filter-block .search-btn:hover {
+  background: #fff;
+}
+
+.filter-block .search-btn:hover svg {
+  fill: #f8bd32;
+}
 
 .custom-table {
-  table-layout: fixed; }
-  .custom-table thead th {
-    background: #f8bd32;
-    color: #fff;
-    border-bottom: none; }
-  .custom-table tr {
-    -webkit-transition: 0.2s ease all;
-    -o-transition: 0.2s ease all;
-    transition: 0.2s ease all; }
-    .custom-table tr td {
-      -webkit-transition: 0.2s ease all;
-      -o-transition: 0.2s ease all;
-      transition: 0.2s ease all;
-      cursor: pointer; }
-  .custom-table tr:hover td {
-    color: #fff;
-    background: #f7d585; }
-    .custom-table tr:hover td:hover {
-      background: #f8bd32; }
+  table-layout: fixed;
+}
+
+.custom-table thead th {
+  background: #f8bd32;
+  color: #fff;
+  border-bottom: none;
+}
+
+.custom-table tr {
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.custom-table tr td {
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  cursor: pointer;
+}
+
+.custom-table tr:hover td {
+  color: #fff;
+  background: #f7d585;
+}
+
+.custom-table tr:hover td:hover {
+  background: #f8bd32;
+}
 
 .pagination-block {
-  float: right; }
-  .pagination-block p {
-    display: inline-block;
-    margin: 0 10px;
-    min-width: 110px;
-    text-align: center; }
+  float: right;
+}
+
+.pagination-block p {
+  display: inline-block;
+  margin: 0 10px;
+  min-width: 110px;
+  text-align: center;
+}
+
