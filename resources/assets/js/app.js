@@ -15,8 +15,15 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('user-table', require('./components/UserTableComponent.vue'));
+import App from './App.vue'
+import router from './router'
+import axios from 'axios';
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: { App },
+    template: '<app></app>',
+    router,
+    axios
 });

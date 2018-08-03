@@ -1,11 +1,10 @@
-
 <template>
     <div class="root">
         <div class="filter-block">
             <input v-model="search" type="text" class="SearchInput" placeholder="Search">
             <select v-model="searchRole">
                 <option value="">All</option>
-                <option v-for="role in roles">{{ role }}</option>
+                <option v-for="(role, index) in roles" :key="index">{{ role }}</option>
             </select>
             <a href="#" @click="fetchUsers(pagination.firstPageUrl , search)" class="search-btn">
                 <svg>
@@ -25,7 +24,7 @@
                     <th>Created at</th>
                 </tr>
                 </thead>
-                <tr v-for="user in users.data">
+                <tr v-for="(user, index) in users.data" :key="index">
                     <td>
                         {{user.id}}
                     </td>
@@ -59,8 +58,6 @@
     </div>
 </template>
 <script>
-
-    import axios from 'axios';
 
     export default {
         data() {
