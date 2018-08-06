@@ -6,7 +6,17 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     routes: [
         {
-            path: '/', component: require('./components/UserTableComponent.vue')
+            path: '/', 
+            component: require('./components/UserTableComponent.vue').default
+        },
+        {
+            name: 'ViewUser',
+            path:'/view/:userId',
+            component: require('./components/UserViewComponent.vue').default,
+        },
+        {
+            path: '/login', 
+            component: require('./components/UserTableComponent.vue')
         }
     ]
 })

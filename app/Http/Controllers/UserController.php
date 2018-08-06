@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -31,5 +30,14 @@ class UserController extends Controller
           'users' => $users
         ];
 
+    }
+    
+    public function getUser(Request $request)
+    {
+        $data = $request->all();
+
+        $user = User::find($data['id']);
+
+        return $user;
     }
 }

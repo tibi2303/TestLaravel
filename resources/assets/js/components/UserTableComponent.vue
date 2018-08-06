@@ -26,7 +26,7 @@
                 </thead>
                 <tr v-for="(user, index) in users.data" :key="index">
                     <td>
-                        {{user.id}}
+                        <router-link :to="{ name: 'ViewUser', params: { userId: user.id }}">{{user.id}}</router-link>
                     </td>
                     <td>
                         {{user.name}}

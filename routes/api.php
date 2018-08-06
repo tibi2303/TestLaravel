@@ -15,3 +15,5 @@ use Illuminate\Http\Request;
 
 Route::get('users/search/', 'UserController@searchUsers');
 
+Route::get('user/view/', 'UserController@getUser');
+
